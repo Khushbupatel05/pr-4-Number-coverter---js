@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number coverter</title>
+    <link rel="stylesheet" href="./assets/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body class="bg">
+    <div class="container d-flex  vh-100">
+        <div class="box mt-5 ">
+            <h3 class="fw-bold">NUMBER CONVERTER</h3>
+            <div class=" pt-3">
+                <div class="  ">
+                    <span class="text-dark fw-semibold fs-5">From :</span>
+                    <div>
+                        <select name="" id="unit1" class="form-control">
+                            <option value="">--Select Number Type--</option>
+                            <option value="2">Binary</option>
+                            <option value="8">Octal</option>
+                            <option value="10">Decimal</option>
+                            <option value="16">Hexadecimal</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="mt-4 ">
+                    <span class="text-dark fw-semibold fs-5">To :</span>
+                    <div>
+                        <select name="" id="unit2" class="form-control">
+                            <option value="">--Select Number Type--</option>
+                            <option value="2">Binary</option>
+                            <option value="8">Octal</option>
+                            <option value="10">Decimal</option>
+                            <option value="16">Hexadecimal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="">
+                <div class="pt-4  col-12">
+                    <label for="" class="fs-5 heading text-dark fw-semibold">Enter Number : </label>
+                    <input type="text" id="inputnum" class="form-control">
+                </div>
+
+                <div class="pt-4 col-12">
+                    <label for="" class="fs-5 heading text-dark fw-semibold">Converter Number :</label>
+                    <input type="text" id="Converter" class="form-control">
+                </div>
+
+                <div class="text-center btn-lg">
+                    <button class="btn btn-success mt-4 " id="con">Convert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./index.js"></script>
+    <script src="./assets/jqurey.js"></script>
+
+    <script>
+        let unit1 = document.getElementById("unit1")
+        let unit2 = document.getElementById("unit2")
+        let num = document.getElementById("inputnum")
+        let Converter = document.getElementById("Converter")
+
+        $(document).ready(() => {
+            $("#con").on("click", () => {
+                let u1 = parseInt(unit1.value)
+                let u2 = parseInt(unit2.value)
+                let num = inputnum.value.trim();
+
+                
+
+                if(unit1.value == "" || unit2.value == ""){
+                    Swal.fire({
+                        icon: "werning",
+                        text: "Select  a valid Unit to convert",
+                    });
+                    return;
+                }
+
+                if(unit1.value ==  unit2.value){
+                    Swal.fire({
+                        iicon: "werning",
+                        text: "same unit cannot be selected",
+                    });
+                    return;
+                }
+
+                if (num === "") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Enter Number!",
+                    });
+                    return;
+                }
+
+                let DecimalNumber = parseInt(num, 10)
+                let Converter = 0;
+
+                switch (u1) {
+                    case 2: {
+                        DecimalNumber = parseInt(num, 2);
+                        break;
+                    }
+                    case 8: {
+                        DecimalNumber = parseInt(num, 8);
+                        break;
+                    }
+                    case 10: {
+                        DecimalNumber = parseInt(num, 10);
+                        break;
+                    }
+                    case 16: {
+                        DecimalNumber = parseInt(num, 16);
+                        break;
+                    }
+                   
+                }
+                switch (u2) {
+                    case 2: {
+                        Converter = DecimalNumber.toString(2);
+                        break;
+                    }
+                    case 8: {
+                        Converter = DecimalNumber.toString(8);
+                        break;
+                    }
+                    case 10: {
+                        Converter = DecimalNumber.toString(10);
+                        break;
+                    }
+                    case 16: {
+                        Converter = DecimalNumber.toString(16);
+                        break;
+                    }
+                }
+                document.getElementById("Converter").value = Converter;
+
+            })
+        })
+    </script>
+</body>
+
+</html>
